@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Bilibili取消双击全屏
 // @namespace    https://github.com/exdrcw/CancelBilibiliDoubleClick
-// @version      0.1
+// @version      0.2
 // @description  取消双击全屏及鼠标暂停的延迟
 // @author       Drcw
 // @require      https://cdn.staticfile.org/jquery/1.8.3/jquery.min.js
@@ -28,10 +28,15 @@
     var a = $("div.bilibili-player-dm-tip-wrap")
     a.remove();
     }
+    function myFunction2(){
+    var a = $("div.bilibili-player-dm-tip-wrap")
+    if(a.length)
+    a.remove();
+    }
 
     jQuery.fn.wait = function (func, times, interval) {
-    var _times = times || 500,
-        _interval = interval || 30,
+    var _times = times || -1,
+        _interval = interval || 500,
         _self = this,
         _selector = this.selector, //选择器
         _iIntervalID; //定时器id
@@ -52,7 +57,8 @@
     }
     return this;
 }
-$(".bilibili-player-dm-tip-wrap").wait(function(){myFunction()})
+
+setInterval(myFunction2,500);
 
 }
 )();
