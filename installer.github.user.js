@@ -17,6 +17,7 @@
 // @include      *://www.bilibili.com/watchroom/*
 // @icon         https://www.google.com/s2/favicons?domain=bilibili.com
 // @grant        none
+// @updateURL    https://cdn.jsdelivr.net/gh/exdrcw/CancelBilibiliDoubleClick/installer.github.user.js
 // ==/UserScript==
 
 
