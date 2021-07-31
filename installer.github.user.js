@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Bilibili取消双击全屏
 // @namespace    https://github.com/exdrcw/CancelBilibiliDoubleClick
-// @version      0.2
+// @version      0.3
 // @description  取消双击全屏及鼠标暂停的延迟
 // @author       Drcw
 // @require      https://cdn.staticfile.org/jquery/1.8.3/jquery.min.js
@@ -26,40 +26,51 @@
     'use strict';
 
     function myFunction(){
-    var a = $("div.bilibili-player-dm-tip-wrap")
-    a.remove();
+        var a = $("div.bilibili-player-dm-tip-wrap")
+        a.remove();
     }
     function myFunction2(){
-    var a = $("div.bilibili-player-dm-tip-wrap")
-    if(a.length)
-    a.remove();
+        var a = $("div.bilibili-player-dm-tip-wrap")
+        var b = $("video");
+        if(a.length)
+        {
+            a.unbind('click').click(function(){
+                if(b[0].paused)
+                    b[0].play()
+                else
+                    b[0].pause()
+
+            })
+            a.unbind('dblclick')
+        }
+
     }
 
     jQuery.fn.wait = function (func, times, interval) {
-    var _times = times || -1,
-        _interval = interval || 500,
-        _self = this,
-        _selector = this.selector, //选择器
-        _iIntervalID; //定时器id
-    if( this.length ){ //如果已经获取到了，就直接执行函数
-        func && func.call(this);
-    } else {
-        _iIntervalID = setInterval(function() {
-            if(!_times) { //是0就退出
-                clearInterval(_iIntervalID);
-            }
-            _times <= 0 || _times--; //如果是正数就 --
-            _self = $(_selector); //再次选择
-            if( _self.length ) { //判断是否取到
-                func && func.call(_self);
-                clearInterval(_iIntervalID);
-            }
-        }, _interval);
+        var _times = times || -1,
+            _interval = interval || 500,
+            _self = this,
+            _selector = this.selector, //选择器
+            _iIntervalID; //定时器id
+        if( this.length ){ //如果已经获取到了，就直接执行函数
+            func && func.call(this);
+        } else {
+            _iIntervalID = setInterval(function() {
+                if(!_times) { //是0就退出
+                    clearInterval(_iIntervalID);
+                }
+                _times <= 0 || _times--; //如果是正数就 --
+                _self = $(_selector); //再次选择
+                if( _self.length ) { //判断是否取到
+                    func && func.call(_self);
+                    clearInterval(_iIntervalID);
+                }
+            }, _interval);
+        }
+        return this;
     }
-    return this;
-}
 
-setInterval(myFunction2,500);
+    setInterval(myFunction2,500);
 
 }
 )();
