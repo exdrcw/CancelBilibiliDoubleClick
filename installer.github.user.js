@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Bilibili取消双击全屏
 // @namespace    https://github.com/exdrcw/CancelBilibiliDoubleClick
-// @version      0.6
+// @version      0.7
 // @description  取消双击全屏及鼠标暂停的延迟
 // @author       Drcw
 // @require      https://cdn.staticfile.org/jquery/1.8.3/jquery.min.js
@@ -34,7 +34,7 @@
     function myFunction2(){
         var a = $("div.bilibili-player-dm-tip-wrap")
         var b = $("bwp-video");
-        if (b.length == 0)
+        if (b.length == 0 || b.attr('src')=='undefined')
         {
             b = $("video");
         }
